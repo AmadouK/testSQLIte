@@ -17,7 +17,7 @@ public class User implements Serializable {
 
     private int age;
 
-    private double lenght;
+    private double height;
 
     private double weight;
 
@@ -27,14 +27,14 @@ public class User implements Serializable {
 
     private String status;
 
-    public User(Integer id, String name, String lastName, String sex, int age, double lenght,
+    public User(Integer id, String name, String lastName, String sex, int age, double height,
                 double weight, String email, String password, String status) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.sex = sex;
         this.age = age;
-        this.lenght = lenght;
+        this.height = height;
         this.weight = weight;
         this.email = email;
         this.password = password;
@@ -81,12 +81,12 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public double getLenght() {
-        return lenght;
+    public double getHeight() {
+        return height;
     }
 
-    public void setLenght(double lenght) {
-        this.lenght = lenght;
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public double getWeight() {

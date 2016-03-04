@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 /**
  * Created by Hamza on 29/02/2016.
  */
@@ -99,7 +101,7 @@ public class SQLiteDatabaseManager {
         return buffer.toString();
     }
 
-    public Long insertUser(User user){
+    public Long addUser(User user){
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SQLHelper.USER_ID, user.getId());
@@ -108,7 +110,7 @@ public class SQLiteDatabaseManager {
         contentValues.put(SQLHelper.USER_EMAIL, user.getEmail());
         contentValues.put(SQLHelper.USER_PASSWORD, user.getPassword());
         contentValues.put(SQLHelper.USER_WEIGHT, user.getWeight());
-        contentValues.put(SQLHelper.USER_HEIGHT, user.getLenght());
+        contentValues.put(SQLHelper.USER_HEIGHT, user.getHeight());
         contentValues.put(SQLHelper.USER_AGE, user.getAge());
         contentValues.put(SQLHelper.USER_STATUS, user.getStatus());
         contentValues.put(SQLHelper.USER_SEX, user.getSex());
@@ -116,5 +118,39 @@ public class SQLiteDatabaseManager {
         db.close();
 
         return result;
+    }
+
+    public ArrayList<User> getUsers(){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        //Select * from users
+
+        ArrayList<User> users = new ArrayList<>();
+
+        String[] columns = {SQLHelper.USER_NAME, SQLHelper.USER_ID, SQLHelper.USER_LASTNAME,
+                SQLHelper.USER_HEIGHT};
+
+        Cursor cursor = db.query(SQLHelper.USER_TABLE, null, null, null, null, null, null);
+
+        while(cursor.moveToNext()){
+            int indexId = cursor.getColumnIndex(SQLHelper.USER_ID);
+            int indexName = cursor.getColumnIndex(SQLHelper.USER_NAME);
+            int indexLastName = cursor.getColumnIndex(SQLHelper.USER_LASTNAME);
+            int indexSex = cursor.getColumnIndex(SQLHelper.USER_SEX);
+            int indexAge = cursor.getColumnIndex(SQLHelper.USER_AGE);
+            int indexWeight = cursor.getColumnIndex(SQLHelper.USER_WEIGHT);
+            int indexHeight = cursor.getColumnIndex(SQLHelper.USER_HEIGHT);
+            int indexEmail = cursor.getColumnIndex(SQLHelper.USER_EMAIL);
+            int indexPassword = cursor.getColumnIndex(SQLHelper.USER_STATUS);
+            int indexStatus = cursor.getColumnIndex(SQLHelper.USER_STATUS);
+
+            users.add(
+                    new User(cursor.getInt(indexId), cursor.getString(indexName),
+                    cursor.getString(indexLastName), cursor.getString(indexSex),
+                    cursor.getInt(indexAge), cursor.getDouble(indexHeight),
+                    cursor.getDouble(indexWeight), cursor.getString(indexEmail),
+                    cursor.getString(indexPassword), cursor.getString(indexStatus))
+            );
+        }
+        return users;
     }
 }

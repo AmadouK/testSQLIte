@@ -2,9 +2,14 @@ package com.m2gl.testdbmysql;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -34,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 "mustaphafekari", "sportif");
         User u5 = new User(5, "Amal", "WESLATI", "M", 25, 1.50, 120, "amalweslati@gmail.com",
                 "amalweslati", "boulangère");
-        User u6 = new User(5, "Nourhane", "KHALED", "", 0, 0, 0, "", "", "");
+        User u6 = new User(6, "Nourhane", "KHALED", "", 0, 0, 0, "", "", "");
         users.add(u1);
         users.add(u2);
         users.add(u3);
@@ -45,7 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addUsers(View view) {
         for(User u: users){
-            sqLiteDatabaseManager.insertUser(u);
+            sqLiteDatabaseManager.addUser(u);
         }
+    }
+
+    public void retrieveUser(View view) throws JSONException {
+        String result = JSONConverter.usersToJSON(sqLiteDatabaseManager.getUsers());
+
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        Log.d("USERS", users.toString());
     }
 }
