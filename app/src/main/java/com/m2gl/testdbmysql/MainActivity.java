@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     public List<User> users;
 
+    EditText email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         sqLiteDatabaseManager = new SQLiteDatabaseManager(this);
 
+        email = (EditText) findViewById(R.id.email);
+
         users = new ArrayList<>();
         User u1 = new User(1, "Hamza", "HABCHI", "M", 25, 1.73, 75, "hamza0habchi@gmail.com",
                 "hamzahabchi", "sportif");
-        User u2 = new User(2, "Amadou", "KANE", "F", 25, 1.80, 75, "amadoukane@gmail.com",
+        User u2 = new User(2, "Amadou", "KANE", "M", 25, 1.80, 75, "amadoukane@gmail.com",
                 "amadoukane", "sportif");
         User u3 = new User(3, "Hamza", "ZOUDANI", "M", 25, 1.70, 75, "hamzazoudani@gmail.com",
                 "hamzazoudani", "sportif");
@@ -54,10 +58,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void retrieveUser(View view) throws JSONException {
+    public void getUsers(View view) throws JSONException {
         String result = JSONConverter.usersToJSON(sqLiteDatabaseManager.getUsers());
 
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         Log.d("USERS", users.toString());
+    }
+
+    public void getUser(View view) throws JSONException {
+        String result = JSONConverter.userToJSON(sqLiteDatabaseManager.getUserByEmail
+                (String.valueOf(email.getText())));
+
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        Log.d("USER", users.toString());
     }
 }

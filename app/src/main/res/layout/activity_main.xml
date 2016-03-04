@@ -24,7 +24,7 @@
         android:focusableInTouchMode="true">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ajouter des utilisateurs"
                 android:id="@+id/button"
@@ -33,13 +33,30 @@
                 android:onClick="addUsers"/>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Récupérer les utilisateurs"
                 android:id="@+id/button2"
-                android:onClick="retrieveUser"
+                android:onClick="getUsers"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Email"
+                android:id="@+id/email"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Récupérer l'utilisateur par mail"
+                android:id="@+id/button3"
+                android:onClick="getUser"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
 
     </LinearLayout>
     </ScrollView>

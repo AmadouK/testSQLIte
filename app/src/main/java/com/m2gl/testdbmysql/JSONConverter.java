@@ -19,9 +19,9 @@ public class JSONConverter  {
                 JSONObject user = new JSONObject();
                 user.put("id", u.getId());
                 user.put("name", u.getName());
-                user.put("lastName", u.getId());
-                user.put("sex", u.getId());
-                user.put("age", u.getId());
+                user.put("lastName", u.getLastName());
+                user.put("sex", u.getSex());
+                user.put("age", u.getAge());
                 user.put("height", u.getHeight());
                 user.put("weight", u.getWeight());
                 user.put("email", u.getEmail());
@@ -33,5 +33,22 @@ public class JSONConverter  {
 
         users.put("users", array);
         return users.toString();
+    }
+
+    public static String userToJSON(User u) throws JSONException {
+        JSONObject user = new JSONObject();
+        if(u != null){
+            user.put("id", u.getId());
+            user.put("name", u.getName());
+            user.put("lastName", u.getLastName());
+            user.put("sex", u.getSex());
+            user.put("age", u.getAge());
+            user.put("height", u.getHeight());
+            user.put("weight", u.getWeight());
+            user.put("email", u.getEmail());
+            user.put("password", u.getPassword());
+            user.put("status", u.getStatus());
+        }
+        return user.toString();
     }
 }
