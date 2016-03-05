@@ -51,4 +51,33 @@ public class JSONConverter  {
         }
         return user.toString();
     }
+
+    public static String programsToJSON(ArrayList<Program> list) throws JSONException {
+        JSONObject programs = new JSONObject();
+        JSONArray array = new JSONArray();
+        if(!list.isEmpty()){
+            for(Program p: list){
+                JSONObject program = new JSONObject();
+                program.put("id", p.getId());
+                program.put("title", p.getTitle());
+                program.put("objective", p.getObjective());
+                program.put("type", p.getType());
+                array.put(program);
+            }
+        }
+        programs.put("programs", array);
+        return programs.toString();
+    }
+
+    public static String programToJSON(Program p) throws JSONException {
+
+        JSONObject program = new JSONObject();
+        if(p != null){
+            program.put("id", p.getId());
+            program.put("title", p.getTitle());
+            program.put("objective", p.getObjective());
+            program.put("type", p.getType());
+        }
+        return program.toString();
+    }
 }
